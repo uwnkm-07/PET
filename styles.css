@@ -1,0 +1,130 @@
+@font-face { 
+    font-family: 'Dream Avenue'; 
+    src: url('da.ttf') format('truetype'); 
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f3f2; /* Set background color */
+    overflow: hidden; /* Prevents scrollbars */
+}
+
+.background-image-1 {
+    position: absolute;
+    top: 0;
+    left: -100%; /* Start off the screen */
+    width: 100%;
+    height: 100%;
+    background: url('1.png') no-repeat left center;
+    background-size: contain; /* Ensure it fits without cropping */
+    animation: floatIn1 3s forwards; /* First image animation */
+}
+
+.background-image-2 {
+    position: absolute;
+    top: 0;
+    left: -100%; /* Start off the screen */
+    width: 100%;
+    height: 100%;
+    background: url('2.png') no-repeat left center;
+    background-size: contain; /* Ensure it fits without cropping */
+    animation: floatIn2 3s forwards; /* Second image animation */
+    animation-delay: 1s; /* Delay to start after the first image */
+}
+
+.logo {
+    position: fixed;
+    top: -70px;
+    left: 60px;
+    width: 500px; /* Adjust size as needed */
+    height: 500px;
+    background: url('3.png') no-repeat center center;
+    background-size: contain; /* Ensure it fits without cropping */
+    z-index: 1000; /* Ensure it stays above other images */
+}
+
+.title-text{
+   position: fixed; 
+    top: 250px;
+    left: 200px;
+   font-family: 'Dream Avenue', sans-serif; /* Specify Dream Avenue font */ 
+   font-size: 16px; 
+   color: #65391d;
+   z-index: 1000; /* Ensure it stays above other images */
+}
+.lines-container {
+    position: fixed;
+    top: 250px;
+    left: 100 px;
+    right: 57%;
+    width: 2px; /* Line width */
+    height: 40%; /* Full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Evenly spaced */
+    z-index: 1000; /* Ensure it stays above other images */
+}
+
+.line {
+    height: 2px; /* Line thickness */
+    background: #65391d; /* Line color same as text */
+    width: 300px; /* Adjust width as needed */
+}
+
+.menu-texts {
+    position: fixed;
+    top: 270px;
+    left: 120px;
+    right: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Space between each text */
+    z-index: 1000; /* Ensure it stays above other images */
+}
+
+.menu-item {
+    font-family: 'Dream Avenue', sans-serif;
+    font-size: 28px;
+    color: #65391d;
+    text-align: center;
+}
+
+.signup {
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    font-family: 'Dream Avenue', sans-serif;
+    font-size: 200%;
+    color: #65391d;
+    z-index: 1000; /* Ensure it stays above other images */
+}
+
+/* Existing CSS remains unchanged */
+.menu-item a {
+    color: #65391d;
+    text-decoration: none;
+}
+
+.menu-item a:hover {
+    text-decoration: underline;
+}
+
+
+@keyframes floatIn1 {
+    0% {
+        left: -100%; /* Start position */
+    }
+    100% {
+        left: 0; /* End position, aligned to the left */
+    }
+}
+
+@keyframes floatIn2 {
+    0% {
+        left: -100%; /* Start position */
+    }
+    100% {
+        left: 0; /* End position, aligned to the left */
+    }
+}

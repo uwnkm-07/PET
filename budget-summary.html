@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Summary</title>
+    <link rel="stylesheet" href="budget-summary.css">
+</head>
+<body>
+    <div class="budget-summary-container">
+        <h1 class="budget-summary-title">Budget Summary</h1>
+        
+        <table id="expenseTable" class="expense-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Total Amount</td>
+                    <td id="totalAmount"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4" id="budgetMessage"></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="homepage-link"><a href="index.html">Homepage</a></div> <!-- Homepage link -->
+    </div>
+
+    <script>
+        function loadSummary() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+                alert('Please log in to view your budget summary.');
+                window.location.href = 'login.html?redirect=budget-summary.html';
+                return;
+            }
+
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            const userExpenses = expenses.filter(expense => expense.user === user.email);
+            const totalExpenses = parseFloat(localStorage.getItem('totalExpenses'));
+            const budgetData = JSON.parse(localStorage.getItem('budget')) || { amount: 0 };
+
+            const expenseTableBody = document.querySelector('#expenseTable tbody');
+            expenseTableBody.innerHTML = '';
+
+            userExpenses.forEach(expense => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${expense.date}</td>
+                    <td>${expense.category}</td>
+                    <td>$${expense.amount}</td>
+                    <td>${expense.notes}</td>
+                `;
+                expenseTableBody.appendChild(row);
+            });
+
+            document.getElementById('totalAmount').textContent = `$${totalExpenses}`;
+
+            if (totalExpenses > parseFloat(budgetData.amount)) {
+                document.getElementById('budgetMessage').textContent = 'Alert: Your total expenses have exceeded the budget!';
+                document.getElementById('budgetMessage').style.color = 'red';
+            } else {
+                document.getElementById('budgetMessage').textContent = 'Your expenses are within the budget.';
+                document.getElementById('budgetMessage').style.color = 'green';
+            }
+        }
+
+        window.onload = loadSummary;
+    </script>
+</body>
+</html>

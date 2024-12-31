@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="login-title">Login</h1>
+        <form class="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        <div class="alert" id="alert-message" style="display: none;">
+            Account does not exist. Kindly <a href="signup.html">sign up</a>.
+        </div>
+        <div class="homepage-link"><a href="index.html">Homepage</a></div> <!-- Homepage link -->
+    </div>
+
+    <script>
+        // Retrieve user credentials from local storage
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+
+        if (storedUser) {
+            document.getElementById('email').value = storedUser.email;
+            document.getElementById('password').value = storedUser.password;
+        }
+
+        function getQueryParam(param) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(param);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Form validation
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (email === '' || password === '') {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Check if the account exists
+            if (storedUser && storedUser.email === email && storedUser.password === password) {
+                // Simulate login process
+                setTimeout(() => {
+                    alert('Login successful!');
+                    const redirect = getQueryParam('redirect') || 'add-expense.html'; // Default to add-expense.html
+                    window.location.href = redirect; // Redirect to specified page or Add Expense page
+                }, 1000); // Simulate delay for login
+            } else {
+                // Show alert message
+                document.getElementById('alert-message').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+
+

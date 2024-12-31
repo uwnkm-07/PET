@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Log</title>
+    <link rel="stylesheet" href="expense-log.css">
+</head>
+<body>
+    <div class="expense-log-container">
+        <h1 class="expense-log-title">Expense Log</h1>
+
+        <div class="filters">
+            <input type="text" id="search" placeholder="Search..." oninput="filterExpenses()">
+            <input type="date" id="filterDate" onchange="filterExpenses()">
+            <select id="filterCategory" onchange="filterExpenses()">
+                <option value="">All Categories</option>
+                <option value="food">Food</option>
+                <option value="transport">Transport</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="utilities">Utilities</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <table id="expenseTable" class="expense-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="homepage-link"><a href="index.html">Homepage</a></div>
+    </div>
+
+    <script>
+        function loadExpenses() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user) {
+                alert('Please log in to view your expenses.');
+                window.location.href = 'login.html?redirect=expense-log.html';
+                return;
+            }
+
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            const userExpenses = expenses.filter(expense => expense.user === user.email);
+
+            const expenseTableBody = document.querySelector('#expenseTable tbody');
+            expenseTableBody.innerHTML = '';
+
+            userExpenses.forEach((expense, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${expense.date}</td>
+                    <td>${expense.category}</td>
+                    <td>$${expense.amount}</td>
+                    <td>${expense.notes}</td>
+                    <td>
+                        <button onclick="editExpense(${index})">Edit</button>
+                        <button onclick="deleteExpense(${index})">Delete</button>
+                    </td>
+                `;
+                expenseTableBody.appendChild(row);
+            });
+        }
+
+        function filterExpenses() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const search = document.getElementById('search').value.toLowerCase();
+            const filterDate = document.getElementById('filterDate').value;
+            const filterCategory = document.getElementById('filterCategory').value;
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            const userExpenses = expenses.filter(expense => expense.user === user.email);
+
+            const expenseTableBody = document.querySelector('#expenseTable tbody');
+            expenseTableBody.innerHTML = '';
+
+            userExpenses
+                .filter(expense => {
+                    return (
+                        (!search || expense.notes.toLowerCase().includes(search)) &&
+                        (!filterDate || expense.date === filterDate) &&
+                        (!filterCategory || expense.category === filterCategory)
+                    );
+                })
+                .forEach((expense, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${expense.date}</td>
+                        <td>${expense.category}</td>
+                        <td>$${expense.amount}</td>
+                        <td>${expense.notes}</td>
+                        <td>
+                            <button onclick="editExpense(${index})">Edit</button>
+                            <button onclick="deleteExpense(${index})">Delete</button>
+                        </td>
+                    `;
+                    expenseTableBody.appendChild(row);
+                });
+        }
+
+        function deleteExpense(index) {
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            expenses.splice(index, 1);
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+            loadExpenses();
+        }
+
+        function editExpense(index) {
+            alert('Edit functionality not yet implemented.');
+        }
+
+        window.onload = loadExpenses;
+    </script>
+</body>
+</html>

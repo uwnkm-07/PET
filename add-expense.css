@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Dream Avenue';
+    src: url('da.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f3f2; /* Background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Dream Avenue', sans-serif; /* Apply Dream Avenue font */
+}
+
+.add-expense-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.add-expense-title {
+    font-size: 24px;
+    color: #65391d; /* Text color same as lines */
+    margin-bottom: 20px;
+}
+
+.add-expense-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #65391d; /* Label color same as lines */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Dream Avenue', sans-serif;
+}
+
+.add-expense-button {
+    background-color: #65391d; /* Button color */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.add-expense-button:hover {
+    background-color: #4a2d13; /* Darker shade on hover */
+}
+
+.homepage-link,
+.expense-log-link {
+    margin-top: 20px;
+}
+
+.homepage-link a,
+.expense-log-link a {
+    font-family: 'Dream Avenue', sans-serif;
+    font-size: 16px;
+    color: #65391d;
+    text-decoration: none;
+}
+
+.homepage-link a:hover,
+.expense-log-link a:hover {
+    text-decoration: underline;
+}

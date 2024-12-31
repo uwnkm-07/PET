@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'Dream Avenue';
+    src: url('da.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f3f2; /* Background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Dream Avenue', sans-serif; /* Apply Dream Avenue font */
+}
+
+.about-us-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.about-us-title {
+    font-size: 24px;
+    color: #65391d; /* Text color same as lines */
+    margin-bottom: 20px;
+}
+
+.about-us-subtitle {
+    font-size: 20px;
+    color: #65391d; /* Subtitle color */
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.about-us-text {
+    font-size: 16px;
+    color: #65391d; /* Text color */
+    margin-bottom: 20px;
+}
+
+.features-list,
+.usage-guide {
+    text-align: left;
+    padding-left: 0;
+    list-style-type: none;
+    font-size: 16px;
+    color: #65391d; /* List color */
+}
+
+.features-list li,
+.usage-guide li {
+    margin-bottom: 10px;
+}
+
+.homepage-link {
+    margin-top: 20px;
+}
+
+.homepage-link a {
+    font-family: 'Dream Avenue', sans-serif;
+    font-size: 16px;
+    color: #65391d;
+    text-decoration: none;
+}
+
+.homepage-link a:hover {
+    text-decoration: underline;
+}

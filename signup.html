@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h1 class="signup-title">Signup</h1>
+        <form class="signup-form" onsubmit="handleSignup(event)">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="signup-button">Create Account</button>
+        </form>
+        <div class="homepage-link"><a href="index.html">Homepage</a></div> <!-- Homepage link -->
+    </div>
+
+    <script>
+        function handleSignup(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Form validation
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (username === '' || email === '' || password === '') {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Store user data in local storage
+            const userData = {
+                username: username,
+                email: email,
+                password: password
+            };
+            localStorage.setItem('user', JSON.stringify(userData));
+
+            // Simulate account creation process
+            setTimeout(() => {
+                alert('Account created successfully!');
+                window.location.href = 'add-expense.html'; // Redirect to Add Expense page
+            }, 1000); // Simulate delay for account creation
+        }
+    </script>
+</body>
+</html>
